@@ -11,7 +11,7 @@ DEFAULT_COOKIE_MAX_AGE = 3600*24*31
 
 class MobileRedirectMiddleware(object):
     def process_request(self, request):
-        if not getattr(settings, 'MOBILE_DOMAIN', False):
+        if not getattr(settings, 'MOBILE_DOMAIN', False) or request.GET.get('_isbrowser', False):
             return 
 
         # test for mobile browser
